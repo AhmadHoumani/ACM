@@ -1,3 +1,7 @@
+//Splay: Bring a node to the root.
+//BST Model
+//Amortized O(lg n) time complexity.
+
 #include <cstdio>
 #include <cstdlib>
 struct Node
@@ -94,7 +98,7 @@ void Splay(Node *T)
     }
     root = T;
 }
-void Insert(int v)
+void Insert(int v) //As BST, find (V) were it should go and put it there -> Splay(V).
 {
     if (!root)
     {
@@ -156,7 +160,7 @@ void Inorder(Node *R)
     puts("");
     Inorder(R->r);
 }
-Node *Find(int v)
+Node *Find(int v) //Search for key(V) as we do in BST, start at the root and keep going down to the correct child to get towards (V). After reaching (V) Splay(V)=> Do Some rotations to get (V) to the root.
 {
     if (!root)
         return NULL;
@@ -186,7 +190,7 @@ Node *Find(int v)
     else
         return NULL;
 }
-bool Erase(int v)
+bool Erase(int v) // Splay(V), then remove (V) from tree. If (V) had 2 children Splay the largest element in the left subtree and make it the new root
 {
     Node *N = Find(v);
     if (!N)
