@@ -11,7 +11,7 @@ signed main() {
 
     int tt, n;
     cin >> tt;
-    while (tt--) {
+    for (int qq = 1; qq <= tt; ++qq) {
         cin >> n;
         char a[n][n];
         int row[n];
@@ -22,7 +22,7 @@ signed main() {
             for (int j = 0; j < n; ++j) {
                 cin >> a[i][j];
                 if (a[i][j] == 'O') {
-                    row[i] = n + 1;
+                    row[i] = MOD;
                     continue;
                 } else if (a[i][j] == 'X') {
                     row[i]--;
@@ -32,7 +32,7 @@ signed main() {
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (a[j][i] == 'O') {
-                    col[i] = n + 1;
+                    col[i] = MOD;
                     continue;
                 } else if (a[j][i] == 'X') {
                     col[i]--;
@@ -60,14 +60,41 @@ signed main() {
                 c++;
             }
         }
-        if (mnc == mnr) {
-            cout << mnr << " " << c + r << "\n";
-        } else if (mnc > mnr) {
-            cout << mnr << " " << r << "\n";
+        for (int i = 0; i < n; ++i) {
+            if (row[i] == 1) {
+                for (int j = 0; j < n; ++j) {
+                    if (a[i][j] == '.' && col[j] == 1) {
+                        if (mnc == mnr) {
+                            c--;
+                        } else {
+                            r--, c--;
+                        }
+                    }
+                }
+            }
+        }
+
+        int count = 0;
+        for (int i = 0; i < n; ++i) {
+            if (row[i] > n + 1) {
+                count++;
+            }
+        }
+        if (count == n) {
+            cout << "Case #" << qq << ": " << "Impossible" << "\n";
+
         } else {
-            cout << mnc << " " << c << "\n";
+            if (mnc == mnr) {
+                cout << "Case #" << qq << ": " << mnr << " " << c + r << "\n";
+            } else if (mnc > mnr) {
+                cout << "Case #" << qq << ": " << mnr << " " << r << "\n";
+            } else {
+                cout << "Case #" << qq << ": " << mnc << " " << c << "\n";
+            }
+
         }
     }
+
 }
 
 
