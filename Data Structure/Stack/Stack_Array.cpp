@@ -9,9 +9,10 @@ const ll MOD = 1000000007;
 
 const int SZ = 5;
 
+template<class Type>
 class Stack {
     int top;
-    int StackArray[SZ];
+    Type StackArray[SZ];
 
 public:
     Stack() : top(-1) {}
@@ -24,7 +25,7 @@ public:
         return top == SZ - 1;
     }
 
-    void Add(int data) {
+    void Add(Type data) {
         if (isFull()) {
             cout << "Stack full";
         } else {
@@ -61,9 +62,9 @@ public:
 
 int main() {
     io;
-    Stack s;
+    Stack<string> s;
     while (!s.isFull()) {
-        int x;
+        string x;
         cin >> x;
         s.Add(x);
         cout << x << " Added!" << "\n";
