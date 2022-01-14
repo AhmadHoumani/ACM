@@ -7,12 +7,12 @@ typedef unsigned long long ull;
 const ll MOD = 1000000007;
 #define io ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 
-const int SZ = 5;
+const int SIZE = 5;
 
 template<class Type>
 class Stack {
     int top;
-    Type StackArray[SZ];
+    Type StackArray[SIZE];
 
 public:
     Stack() : top(-1) {}
@@ -22,7 +22,7 @@ public:
     }
 
     bool isFull() {
-        return top == SZ - 1;
+        return top == SIZE - 1;
     }
 
     void Add(Type data) {
