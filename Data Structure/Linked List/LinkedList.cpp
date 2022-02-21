@@ -53,6 +53,7 @@ public:
 			head = newNode;
 		}
 		count++;
+		cout << "Inseted First " << data << "\n";
 	}
 	void insertLast(int data)
 	{
@@ -70,7 +71,9 @@ public:
 			tail = newNode;
 		}
 		count++;
+		cout << "Inseted Last " << data << "\n";
 	}
+
 	void insertAtIndex(int data, int index)
 	{
 		if (index > count || index < 0)
@@ -98,17 +101,75 @@ public:
 			newNode->next = curr->next;
 			curr->next = newNode;
 			count++;
+			cout << "Inseted " << data << " at index " << index
+				 << "\n";
 		}
 	}
 
+	void RemoveAtIndex(int index)
+	{
+		if (index == 0)
+		{
+			head = head->next;
+		}
+		else if (!isEmpty())
+		{
+			node *prev = head;
+			index--;
+			while (index--)
+			{
+				prev = prev->next;
+			}
+			node *curr = prev->next;
+			prev->next = curr->next;
+			delete (curr);
+		}
+	}
+	
+	int search(int value)
+	{
+		int pos = 0;
+		node *curr = head;
+		while (curr != NULL)
+		{
+			if (curr->item == value)
+			{
+				cout << "Found " << value << " at Pos ";
+
+				return pos;
+			}
+			curr = curr->next;
+			pos++;
+		}
+		return -1;
+	}
+	void reverse()
+	{
+		node *curr, *prev, *next;
+		prev = NULL;
+		curr = head;
+		next = curr->next;
+		while (next != NULL)
+		{
+			next = curr->next;
+			curr->next = prev;
+			prev = curr;
+			curr = next;
+		}
+		head = prev;
+		cout << "\nReversed ";
+	}
 	void DisplayALL()
 	{
+		cout << "\n";
+		cout << "List = ";
 		node *curr = head;
 		while (curr != NULL)
 		{
 			cout << curr->item << " ";
 			curr = curr->next;
 		}
+		cout << "\n";
 	}
 };
 
@@ -116,10 +177,16 @@ int main()
 {
 	io;
 	LinkedList list;
-	list.insertFirst(10);
-	list.insertFirst(5);
-	list.insertFirst(0);
+	list.insertFirst(1);
+	list.insertFirst(2);
+	list.insertFirst(3);
 	list.insertLast(10);
+	list.insertLast(4);
 	list.insertAtIndex(5, 3);
+	list.DisplayALL();
+	cout << list.search(10);
+	list.reverse();
+	list.DisplayALL();
+	list.RemoveAtIndex(5);
 	list.DisplayALL();
 }
